@@ -12,7 +12,7 @@
 #import "XMGShopCell.h"
 #import "MJRefresh.h"
 #import "MJExtension.h"
-@interface ViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface ViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,ZYCWaterflowLayoutDelegate>
 /** 所有的商品数据 */
 @property(nonatomic,strong)NSMutableArray *shops;
 @property(nonatomic,weak)UICollectionView *collectionView;
@@ -65,11 +65,13 @@ static NSString *const shopId = @"shop";
 - (void)setUpLayout
 {
     //创建布局
-    UICollectionViewLayout *layout = [[ZYCWaterflowLayout alloc]init];
+    ZYCWaterflowLayout *layout = [[ZYCWaterflowLayout alloc]init];
+    layout.delegate = self;
     //创建collentionView
     UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:layout];
     collectionView.backgroundColor = [UIColor whiteColor];
     collectionView.dataSource = self;
+    
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
     
@@ -96,5 +98,11 @@ static NSString *const shopId = @"shop";
     cell.backgroundColor = [UIColor orangeColor];
     return cell;
 }
-
+#pragma mark - ZYCWaterflowLayoutDelegate
+- (CGFloat)waterflowLayout:(ZYCWaterflowLayout *)waterflowLayout heightForItemAtIndex:(NSUInteger)index itemWid:(CGFloat)itemWid
+{
+    XMGShop *shop = self.shops[index];
+    return itemWid *shop.h/shop.w;
+    
+}
 @end
