@@ -12,7 +12,7 @@
 #import "XMGShopCell.h"
 #import "MJRefresh.h"
 #import "MJExtension.h"
-@interface ViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,ZYCWaterflowLayoutDelegate>
+@interface ViewController ()<UICollectionViewDataSource,ZYCWaterflowLayoutDelegate>
 /** 所有的商品数据 */
 @property(nonatomic,strong)NSMutableArray *shops;
 @property(nonatomic,weak)UICollectionView *collectionView;
@@ -73,11 +73,11 @@ static NSString *const shopId = @"shop";
     collectionView.dataSource = self;
     
     [self.view addSubview:collectionView];
-    self.collectionView = collectionView;
+    
     
     //注册
     [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([XMGShopCell class]) bundle:nil] forCellWithReuseIdentifier:shopId];
-    collectionView.dataSource = self;
+   self.collectionView = collectionView;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -104,5 +104,13 @@ static NSString *const shopId = @"shop";
     XMGShop *shop = self.shops[index];
     return itemWid *shop.h/shop.w;
     
+}
+- (CGFloat)rowMarginInWaterflowLayout:(ZYCWaterflowLayout *)waterflowLayout
+{
+    return 30;
+}
+- (CGFloat)columnCountInWaterflowLayout:(ZYCWaterflowLayout *)waterflowLayout
+{
+    return 2;
 }
 @end
