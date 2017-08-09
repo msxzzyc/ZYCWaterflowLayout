@@ -23,4 +23,6 @@
 @interface ZYCWaterflowLayout : UICollectionViewLayout
 /** 代理 */
 @property(nonatomic,weak) id <ZYCWaterflowLayoutDelegate> delegate;
+//@property(nonatomic,assign)CGFloat rowMargin;
+//@property(nonatomic,assign)CGFloat columnCount;
 @end

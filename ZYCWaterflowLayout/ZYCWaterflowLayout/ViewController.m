@@ -111,6 +111,11 @@ static NSString *const shopId = @"shop";
 }
 - (CGFloat)columnCountInWaterflowLayout:(ZYCWaterflowLayout *)waterflowLayout
 {
-    return 2;
+    if(self.shops.count<=50) return 2;
+    return 3;
+}
+- (UIEdgeInsets)edgeInsetsInWaterflowLayout:(ZYCWaterflowLayout *)waterflowLayout
+{
+    return UIEdgeInsetsMake(10, 20, 30, 40);
 }
 @end
